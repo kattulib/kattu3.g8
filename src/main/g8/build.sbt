@@ -1,5 +1,12 @@
 import Dependencies._
 
+val commonSettings = Seq(
+  scalacOptions ++= Seq(
+    "-Wunused:all",
+    "-rewrite",
+    "-no-indent"
+  )
+)
 
 lazy val example = project
     .in(file("example"))
@@ -7,6 +14,7 @@ lazy val example = project
     .settings(
         name := "example",
         publish / skip := true,
+        commonSettings,
     )
     .enablePlugins(ScalafixPlugin, AutomateHeaderPlugin)
 
@@ -21,6 +29,7 @@ lazy val tests = project
                 munit.value % Test,
             )
         },
+        commonSettings,
     )
     .enablePlugins(ScalafixPlugin, AutomateHeaderPlugin)
 
@@ -28,6 +37,7 @@ lazy val root = project
     .in(file("."))
     .settings(
         name := (ThisBuild / name).value,
+        commonSettings,
     )
     .enablePlugins(ScalafixPlugin, AutomateHeaderPlugin)
 
@@ -63,9 +73,6 @@ ThisBuild / testFrameworks += new TestFramework("munit.Framework")
 /* scalafix settings */
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
-ThisBuild / scalacOptions ++= Seq(
-    "-Wunused:all",
-)
 
 /* scaladoc settings */
 ThisBuild / autoAPIMappings := true
