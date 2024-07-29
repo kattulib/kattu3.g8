@@ -79,7 +79,7 @@ ThisBuild / autoAPIMappings := true
 Compile / doc / scalacOptions ++= Seq(
     "-doc-title", (ThisBuild / name).value,
     "-project-version", (ThisBuild / version).value,
-    "-project-logo", "docs/icon.jpeg",
+    // "-project-logo", "docs/icon.jpeg",
 )
 
 /* publish settings */
