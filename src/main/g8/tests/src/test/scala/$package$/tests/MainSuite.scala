@@ -1,4 +1,4 @@
-package $package$
+package $package$.tests
 
 class MainSuite extends munit.FunSuite {
   test("test") {

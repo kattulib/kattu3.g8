@@ -54,33 +54,41 @@ val commonSettings = Seq(
 
 lazy val example = project
     .in(file("example"))
-    .dependsOn(root)
+    .dependsOn(core)
+    .settings(commonSettings)
     .settings(
         name := "example",
         publish / skip := true,
-        commonSettings,
     )
     .enablePlugins(ScalafixPlugin, AutomateHeaderPlugin)
 
 lazy val tests = project
     .in(file("tests"))
-    .dependsOn(root)
+    .dependsOn(core)
+    .settings(commonSettings)
     .settings(
         name := "tests",
         publish / skip := true,
+    )
+    .settings(
         libraryDependencies ++= {
             Seq(
                 munit.value % Test,
             )
         },
-        commonSettings,
     )
     .enablePlugins(ScalafixPlugin, AutomateHeaderPlugin)
 
-lazy val root = project
-    .in(file("."))
+lazy val core = project
+    .in(file("core"))
+    .settings(commonSettings)
     .settings(
-        name := (ThisBuild / name).value,
-        commonSettings,
+        name := "core",
+        moduleName := "$name$-core",
     )
     .enablePlugins(ScalafixPlugin, AutomateHeaderPlugin)
+
+lazy val $name$ = project
+    .in(file("."))
+    .aggregate(core, tests, example)
+
