@@ -3,7 +3,7 @@
 // See https://www.foundweekends.org/giter8/testing.html#Using+the+Giter8Plugin for more details.
 lazy val root = (project in file("."))
   .settings(
-    name := "kattu3.g8",
+    name := "lamda3.g8",
     test in Test := {
       val _ = (g8Test in Test).toTask("").value
     },
